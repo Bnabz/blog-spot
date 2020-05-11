@@ -67,8 +67,29 @@ def new_post():
     if form.validate_on_submit():
         date_posted = datetime.today()
         author = current_user._get_current_object().username 
-        post = Post(title=form.title.data, content=form.content.data, author=current_user,date_posted = date_posted)
+        user_id = current_user._get_current_object().id
+        post = Post(title=form.title.data, content=form.content.data, author=author,date_posted = date_posted,user_id = user_id)
         post.save()
         return redirect(url_for('main.index'))
     return render_template('new_post.html', title='New Post',
                            form=form, legend='New Post')
+
+
+
+
+@main.route('/comments/<int:post_id>', methods = ['POST','GET'])
+@login_required
+def comment(post_id):
+    form = CommentForm()
+    post = Post.query.get(post_id)
+    post_comments = Comment.query.filter_by(post_id = post_id).all()
+    
+    if form.validate_on_submit():
+        comment = form.comment.data 
+        post_id = post_id
+        user_id = current_user._get_current_object().id
+        new_comment = Comment(comment = comment,user_id = user_id,post_id = post_id)
+        new_comment.save()
+        return redirect(url_for('.comment', post_id = post_id))
+    return render_template('comments.html', form =form, post = post,post_comments=post_comments)
+
