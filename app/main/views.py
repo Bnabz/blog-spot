@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from .forms import UpdateProfile,PostForm,CommentForm
-from ..models import User,Post,Comment,Quotes
+from ..models import User,Post,Comment
 from flask_login import login_required, current_user
 from .. import db,photos
 from datetime import datetime
@@ -65,7 +65,9 @@ def update_pic(uname):
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        date_posted = datetime.today()
+        author = current_user._get_current_object().username 
+        post = Post(title=form.title.data, content=form.content.data, author=current_user,date_posted = date_posted)
         post.save()
         return redirect(url_for('main.index'))
     return render_template('new_post.html', title='New Post',
