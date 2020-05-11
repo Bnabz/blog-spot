@@ -58,3 +58,15 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+
+@main.route("/new_post", methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post.save()
+        return redirect(url_for('main.index'))
+    return render_template('new_post.html', title='New Post',
+                           form=form, legend='New Post')
