@@ -1,0 +1,14 @@
+
+body {
+    background: rgba(111, 115, 122, 0.2);
+    color: #333333;
+   
+  }
+hr { height:1px; border:none; color:rgb(196, 98, 241); background-color: rgb(196, 98, 241);}
+
+button {
+    background-color:rgb(196, 98, 241);
+}
+
+
+  
