@@ -83,13 +83,32 @@ def comment(post_id):
     form = CommentForm()
     post = Post.query.get(post_id)
     post_comments = Comment.query.filter_by(post_id = post_id).all()
+    can_delete = False
+    idb = post.user_id
+    ida = current_user._get_current_object().id 
+    if ida == idb:
+        can_delete = True
     
     if form.validate_on_submit():
         comment = form.comment.data 
         post_id = post_id
         user_id = current_user._get_current_object().id
         new_comment = Comment(comment = comment,user_id = user_id,post_id = post_id)
-        new_comment.save()
+        new_comment.save_comment()
         return redirect(url_for('.comment', post_id = post_id))
-    return render_template('comments.html', form =form, post = post,post_comments=post_comments)
+    
+    print(ida)
+    print(idb)
+    return render_template('comments.html', form =form, post = post,post_comments=post_comments,ida = ida, idb = idb,can_delete=can_delete)
+
+
+@main.route('/delete_comment/<int:id>')
+@login_required
+def delete_comment(id):
+    
+    comment = Comment.query.filter_by(id = id).first()
+    post_id = comment.post_id
+    comment.delete()
+
+    return redirect(url_for('main.comment', post_id = post_id))
 

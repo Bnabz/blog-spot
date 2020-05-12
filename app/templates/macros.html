@@ -31,20 +31,38 @@
 
 
 {% macro display_comments(post_comments) %}
+
 {% if post_comments %}
-<div class="card-columns">
-    {% for each_comment in post_comments %}
-    <div class="card">
-        
-        <div class="card-body">
-            <p>{{each_comment.comment}}</p>
+    {% if ida == idb %}
+        <div class="card-columns">
+            {% for each_comment in post_comments %}
+            <div class="card"> 
+                <div class="card-body">
+                    <p>{{each_comment.comment}}
+                        <a href="/delete_comment/{{each_comment.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    </div>
-    {% endfor %}
-</div>
+
+    {% else %}
+        <div class="card-columns">
+            {% for each_comment in post_comments %}
+            <div class="card">
+                
+                <div class="card-body">       
+                    <p>{{each_comment.comment}}</p>  
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+   {% endif %}
 {% else %}
-<p>There are no comments for this post.</p>
+   <p>There are no comments for this post.</p>
 {% endif %}
+
 {% endmacro %}
 
 
