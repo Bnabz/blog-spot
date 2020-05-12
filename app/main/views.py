@@ -83,7 +83,6 @@ def comment(post_id):
     form = CommentForm()
     post = Post.query.get(post_id)
     post_comments = Comment.query.filter_by(post_id = post_id).all()
-    can_delete = False
     idb = post.user_id
     ida = current_user._get_current_object().id 
     if ida == idb:
@@ -99,7 +98,7 @@ def comment(post_id):
     
     print(ida)
     print(idb)
-    return render_template('comments.html', form =form, post = post,post_comments=post_comments,ida = ida, idb = idb,can_delete=can_delete)
+    return render_template('comments.html', form =form, post = post,post_comments=post_comments,ida = ida, idb = idb,)
 
 
 @main.route('/delete_comment/<int:id>')
