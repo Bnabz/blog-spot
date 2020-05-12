@@ -7,7 +7,7 @@
             <div class="card-title">
                 <p><strong>Author: </strong>{{post.author}}. <small class="text-muted">Date posted: {{ post.date_posted.strftime('%Y-%m-%d') }}</small></p>       
             </div>
-            <hr>
+            <hr style="height:1px;">
             <div class="card-body">
                 <u><h4>{{ post.title }}</h4></u>
                 <p>{{ post.content }}</p> 
@@ -17,6 +17,7 @@
             </div>   
         </div>
         <hr>
+        <br>
         {% endfor %}
     </div>
     </div>

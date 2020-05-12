@@ -4,7 +4,7 @@ body {
     color: #333333;
    
   }
-hr { height:1px; border:none; color:rgb(196, 98, 241); background-color: rgb(196, 98, 241);}
+hr { height:2px; border:none; color:rgb(30, 29, 31); background-color: rgb(30, 29, 31);}
 
 button {
     background-color:rgb(196, 98, 241);

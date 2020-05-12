@@ -69,9 +69,9 @@ class Comment(db.Model):
     comment = db.Column(db.Text())
     dateposted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
+    def save_comment(self):
+       db.session.add(self)
+       db.session.commit()
 
     @classmethod
     def get_comments(cls, post_id):
