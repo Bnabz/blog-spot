@@ -46,3 +46,12 @@
 <p>There are no comments for this post.</p>
 {% endif %}
 {% endmacro %}
+
+
+{% macro display_quote(quotes)%}
+<div class="jumbotron">
+    <h2 class="text-danger">Food for thought:</h2>
+    <h5>{{quotes.quote}}</h5>
+    <p>~ {{quotes.author}}</p>
+</div>
+{%endmacro%}
